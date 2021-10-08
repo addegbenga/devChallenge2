@@ -25,17 +25,17 @@ const data = [
 ];
 export default function Landing() {
   return (
-    <div className="bg-black">
+    <div className="bg-black md:flex ">
       {/* // start  mobile first screen */}
-      <div className="search_home min-h-screen">
-        <div className="absolute top-20">
+      <div className="search_home relative min-h-screen md:w-1/4 ">
+        <div className="absolute  top-20">
           <img className="mix-blend-screen opacity-5 " src={bg} alt="" />
         </div>
 
-        <div className="flex justify-between items-center p-2 pt-2">
+        <div className="flex justify-between items-center p-2 pt-2 md:pt-4 overflow-hidden">
           <input
             style={{ background: "#6E707A", fontWeight: 500 }}
-            className="p-1.5 pl-3 text-sm placeholder-white "
+            className="p-1.5 pl-3 md:w-1/2 text-sm placeholder-white  "
             type="search"
             placeholder="Search for places"
           />
@@ -43,7 +43,7 @@ export default function Landing() {
             style={{ background: "#6E707A" }}
             className="p-2 rounded-full text-white shadow-lg"
           >
-            <MdOutlineMyLocation size={22} />
+            <MdOutlineMyLocation size={18} />
           </div>
         </div>
         <div className="mt-28 flex justify-center">
@@ -82,14 +82,23 @@ export default function Landing() {
         </div>
       </div>
       {/* // end  mobile first screen */}
+
       {/* // start of  mobile second screen */}
-      <div style={{ background: "#100E1D" }} className="min-h-screen px-5">
-        <div className="grid grid-cols-2 gap-5  pt-16">
+
+      <div
+        style={{ background: "#100E1D" }}
+        className="min-h-screen px-5 md:px-20  md:flex-1"
+      >
+          <div>
+              <span>C</span>
+              <span>C</span>
+          </div>
+        <div className="grid grid-cols-2 md:flex md:flex-wrap gap-3  pt-16">
           {data.map((item, i) => (
             <div
               style={{ background: "#1E213A" }}
               key={i}
-              className=" flex flex-col items-center p-2"
+              className=" flex flex-col md:flex-grow  items-center p-2"
             >
               <div className="flex flex-col items-center pt-1">
                 <h1 style={{ fontWeight: 500 }} className="text-white pb-1">
@@ -126,7 +135,7 @@ export default function Landing() {
           >
             Today's Highlights
           </h1>
-          <div>
+          <div className="md:grid md:grid-cols-2 md:gap-8">
             {/* wind status */}
             <div
               className="flex flex-col items-center mt-8 p-3"
@@ -155,7 +164,7 @@ export default function Landing() {
 
             {/* humidity */}
             <div
-              className="flex flex-col items-center mt-8 p-3 px-8"
+              className="flex flex-col items-center mt-8  p-3 px-8"
               style={{ background: "#1E213A", color: "#E7E7EB" }}
             >
               <h2 style={{ fontWeight: 500 }}>Humidity</h2>
@@ -165,7 +174,7 @@ export default function Landing() {
                   %
                 </h1>
               </div>
-              <div className="w-full h-1.5 bg-red-100 mt-3 rounded-full mb-3">
+              <div className="w-full h-1.5 bg-white mt-3 rounded-full mb-3">
                 <div className="w-1/2 h-1.5 bg-yellow-300 rounded-l-full "></div>
                 <div className="flex justify-between text-sm ">
                   <h1 className="-mt-6 ">0</h1>
@@ -178,7 +187,7 @@ export default function Landing() {
 
             {/* visibility */}
             <div
-              className="flex flex-col items-center mt-8 p-3"
+              className="flex flex-col items-center mt-8 md:mt-0 p-3"
               style={{ background: "#1E213A", color: "#E7E7EB" }}
             >
               <h2 style={{ fontWeight: 500 }}>Visibility</h2>
@@ -193,7 +202,7 @@ export default function Landing() {
 
             {/* air pressure */}
             <div
-              className="flex flex-col items-center mt-8 p-3"
+              className="flex flex-col items-center mt-8 md:mt-0 p-3"
               style={{ background: "#1E213A", color: "#E7E7EB" }}
             >
               <h2 style={{ fontWeight: 500 }}>Air pressure</h2>
@@ -207,8 +216,17 @@ export default function Landing() {
             {/* air pressure */}
           </div>
         </div>
-        {/* // end of  mobile third screen */}
+        <div
+          style={{ background: "#100E1D", color: "#E7E7EB", fontWeight: 500 }}
+          className="pt-20 flex justify-center pb-3 "
+        >
+          <p className="text-sm">
+            created by <span className="font-bold">adeyemi</span> -
+            devChallenges.io
+          </p>
+        </div>
       </div>
+      {/* // end of  mobile third screen */}
     </div>
   );
 }
