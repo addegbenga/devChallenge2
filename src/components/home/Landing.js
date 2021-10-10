@@ -197,7 +197,7 @@ export default function Landing() {
           </div>
           <div className="grid select-none grid-cols-2 md:flex md:flex-wrap gap-3  pt-16">
             {!loading && weatherdata ? (
-              weatherdata.slice(1).map((item, i) => (
+              weatherdata.map((item, i) => (
                 <div
                   onClick={() =>
                     dispatch({
