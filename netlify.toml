@@ -1,0 +1,10 @@
+# api redirect.
+[[redirects]]
+  from = "/api/*"
+  to = "https://www.metaweather.com/api/:splat"
+  
+  status = 200
+# SPA router support.
+[[redirects]]
+  from = "/*"
+  to = "/index.html
