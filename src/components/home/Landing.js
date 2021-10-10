@@ -152,20 +152,22 @@ export default function Landing() {
                 )}
               </div>
 
-              <div
-                style={{
-                  color: "#88869D",
-                  fontSize: "18px",
-                  fontWeight: "600",
-                }}
-                className="mt-8 flex items-center"
-              >
-                <span className={`${loading && "absolute hidden"}`}>
-                  {" "}
-                  {!loading ? <MdLocationOn /> : null}
-                </span>
-                <p className="pl-1">{location.title}</p>
-              </div>
+              {!loading && weatherdata ? (
+                <div
+                  style={{
+                    color: "#88869D",
+                    fontSize: "18px",
+                    fontWeight: "600",
+                  }}
+                  className="mt-8 flex items-center"
+                >
+                  <span className={`${loading && "absolute hidden"}`}>
+                    {" "}
+                    {!loading ? <MdLocationOn /> : null}
+                  </span>
+                  <p className="pl-1">{location.title}</p>
+                </div>
+              ) : null}
             </div>
           ) : (
             <Loading />

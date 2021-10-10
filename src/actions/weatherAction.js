@@ -16,7 +16,7 @@ export const getWeatherByCurrentLocation = () => async (dispatch) => {
       type: IS_LOADING,
     });
 
-    const response = await axios.get("https://ipgeolocation.abstractapi.com/v1/?api_key=bf90056d256c411b8665c421c0d40f27");
+    const response = await axios.get("/api/");
     console.log(response);
     const resp = await axios.get(
       `/giphy/location/search/?lattlong=${response.data.latitude},${response.data.longitude}`
