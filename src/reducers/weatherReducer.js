@@ -6,6 +6,7 @@ import {
   GET_WEATHER_BY_QUERY_RESULT,
   CLEAR_SEARCH_RESULT,
   IS_LOADING,
+  GET_WEATHER_ERROR,
 } from "../actions/types";
 
 const initialState = {
@@ -14,6 +15,7 @@ const initialState = {
   allweather: [],
   singleweather: null,
   loading: false,
+  error: {},
 };
 
 export const weatherReducer = (state = initialState, action) => {
@@ -70,6 +72,11 @@ export const weatherReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
+      };
+    case GET_WEATHER_ERROR:
+      return {
+        ...state,
+        error: action.payload,
       };
     default:
       return state;

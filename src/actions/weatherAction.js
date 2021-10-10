@@ -4,6 +4,7 @@ import {
   GET_CURRENT_WEATHER,
   GET_WEATHER_QUERY_RESULT,
   IS_LOADING,
+  GET_WEATHER_ERROR,
 } from "../actions/types";
 
 export const getWeatherByLocation = (body) => async (dispatch) => {
@@ -22,12 +23,14 @@ export const getWeatherByLocation = (body) => async (dispatch) => {
       payload: response.data,
     });
   } catch (error) {
-    console.log(error);
+    dispatch({
+      type: GET_WEATHER_ERROR,
+      payload: error,
+    });
   }
 };
 
 export const getCurrentLocationWeather = (woeid) => async (dispatch) => {
-  console.log(woeid);
   try {
     dispatch({
       type: IS_LOADING,
@@ -39,7 +42,10 @@ export const getCurrentLocationWeather = (woeid) => async (dispatch) => {
       payload: response.data,
     });
   } catch (error) {
-    console.log(error);
+    dispatch({
+      type: GET_WEATHER_ERROR,
+      payload: error,
+    });
   }
 };
 
@@ -55,6 +61,9 @@ export const getWeatherByQuery = (query) => async (dispatch) => {
       payload: response.data,
     });
   } catch (error) {
-    console.log(error);
+    dispatch({
+      type: GET_WEATHER_ERROR,
+      payload: error,
+    });
   }
 };

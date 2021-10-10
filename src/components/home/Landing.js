@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { GET_SINGLE_WEATHER } from "../../actions/types";
 import { WiCelsius, WiFahrenheit } from "react-icons/wi";
@@ -6,7 +6,7 @@ import { MdLocationOn, MdOutlineMyLocation } from "react-icons/md";
 import { IoPaperPlane } from "react-icons/io5";
 import "./style.css";
 import Sidebar from "../nav/Sidebar";
-import Loading from "../../Loading";
+import Loading from "../../utils/Loading";
 
 export default function Landing() {
   const dispatch = useDispatch();

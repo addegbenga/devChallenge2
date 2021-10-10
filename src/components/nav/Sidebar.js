@@ -112,7 +112,7 @@ export default function Sidebar({ isOpen, closeSidebar }) {
                 </div>
                 <div style={{ color: "#E7E7EB" }} className="mt-10">
                   {searchResult &&
-                    searchResult.map((item) => (
+                    searchResult.map((item,i) => (
                       <div
                         onClick={() =>
                           dispatch({
@@ -120,7 +120,7 @@ export default function Sidebar({ isOpen, closeSidebar }) {
                             payload: item,
                           })
                         }
-                        key={item.id}
+                        key={i}
                         className="border  transition duration-500 ease-in-out  border-custom_border-hover searched_location border-opacity-0 hover:border-opacity-100 p-2 mb-6  cursor-pointer flex justify-between items-center"
                       >
                         <h2>{item.title}</h2>

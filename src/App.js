@@ -11,10 +11,10 @@ import Landing from "./components/home/Landing";
 function App() {
   const dispatch = useDispatch();
   const woeid = useSelector((state) => state.weather.weatherId.woeid);
+
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((item) => {
-        console.log(item);
         dispatch(
           getWeatherByLocation({
             lat: item.coords.latitude,
