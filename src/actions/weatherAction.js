@@ -7,13 +7,16 @@ import {
   GET_WEATHER_ERROR,
 } from "../actions/types";
 
+
+
+
 export const getWeatherByCurrentLocation = () => async (dispatch) => {
   try {
     dispatch({
       type: IS_LOADING,
     });
 
-    const response = await axios.get("https://extreme-ip-lookup.com/json/");
+    const response = await axios.get("http://ip-api.com/json/");
     console.log(response);
     const resp = await axios.get(
       `/giphy/location/search/?lattlong=${response.data.lat},${response.data.lon}`
