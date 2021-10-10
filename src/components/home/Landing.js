@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { GET_SINGLE_WEATHER } from "../../actions/types";
 import { WiCelsius, WiFahrenheit } from "react-icons/wi";
@@ -36,46 +36,50 @@ export default function Landing() {
       <div className="bg-black md:flex ">
         {/* // start  mobile first screen */}
         <div className="search_home relative min-h-screen md:w-1/4 ">
-          <div className="absolute  top-20">
-            <img
-              className="mix-blend-screen opacity-5 "
-              src="/assets/Cloud-background.png"
-              alt=""
-            />
-          </div>
+          {!loading && weatherdata ? (
+            <div>
+              <div className="absolute  top-20">
+                <img
+                  className="mix-blend-screen opacity-5 "
+                  src="/assets/Cloud-background.png"
+                  alt=""
+                />
+              </div>
 
-          <div className="flex justify-between items-center p-2 pt-2 md:pt-4 overflow-hidden">
-            <button
-              onClick={handleOpenSidebar}
-              className="text-sm p-2 px-4 text"
-              style={{
-                background: "#6E707A",
-                fontWeight: 500,
-                color: " #E7E7EB",
-              }}
-            >
-              Search for places{" "}
-            </button>
-            <div
-              style={{ background: "#6E707A" }}
-              className="p-2 rounded-full text-white shadow-lg"
-            >
-              <MdOutlineMyLocation size={18} />
+              <div className="flex justify-between items-center p-3 pt-3 md:pt-4 overflow-hidden">
+                <button
+                  onClick={handleOpenSidebar}
+                  className="text-sm p-3 px-4 text"
+                  style={{
+                    background: "#6E707A",
+                    fontWeight: 500,
+                    color: " #E7E7EB",
+                  }}
+                >
+                  Search for places{" "}
+                </button>
+                <div
+                  style={{ background: "#6E707A" }}
+                  className="p-2 rounded-full text-white shadow-lg"
+                >
+                  <MdOutlineMyLocation size={24} />
+                </div>
+              </div>
+              {!loading && (
+                <div className="mt-28 flex justify-center">
+                  <img
+                    className="w-28 "
+                    src={`/assets/${
+                      singledata
+                        ? singledata.weather_state_abbr
+                        : weatherdata && weatherdata[0].weather_state_abbr
+                    }.png`}
+                    alt="weather"
+                  />
+                </div>
+              )}
             </div>
-          </div>
-          {!loading && (
-            <div className="mt-28 flex justify-center">
-              <img
-                className="w-28 "
-                src={`/assets/${
-                  singledata
-                    ? singledata.weather_state_abbr
-                    : weatherdata && weatherdata[0].weather_state_abbr
-                }.png`}
-                alt="weather"
-              />
-            </div>
-          )}
+          ) : null}
 
           <div className="flex justify-center items-center mt-18 pb-16 flex-col">
             {singledata ? (
@@ -179,7 +183,7 @@ export default function Landing() {
               <WiFahrenheit color="#E7E7EB" size={35} />
             </button>
           </div>
-          <div className="grid grid-cols-2 md:flex md:flex-wrap gap-3 cursor-pointer  pt-16">
+          <div className="grid select-none grid-cols-2 md:flex md:flex-wrap gap-3  pt-16">
             {!loading && weatherdata ? (
               weatherdata.slice(1).map((item, i) => (
                 <div
@@ -190,9 +194,9 @@ export default function Landing() {
                     })
                   }
                   key={i}
-                  className="flex bg-custom_bg-secondary flex-col md:flex-grow hover:scale-110 transition duration-500 ease-in-out transform focus:bg-red-100  items-center p-2 hover:bg-custom_hover-primary"
+                  className="select-none flex bg-custom_bg-secondary flex-col  md:flex-grow hover:scale-110 transition duration-300 ease-in-out transform  items-center p-2 "
                 >
-                  <div className="flex flex-col items-center pt-1">
+                  <div className="flex select-none  flex-col items-center pt-1">
                     <h1 style={{ fontWeight: 500 }} className="text-white pb-1">
                       {mydate(item.applicable_date).toDateString()}
                     </h1>
@@ -203,7 +207,7 @@ export default function Landing() {
                       alt="shower"
                     />
                   </div>
-                  <div className="flex justify-between items-center mt-4">
+                  <div className="flex select-none  justify-between items-center mt-4">
                     <h1
                       style={{ fontSize: "18px", color: " #E7E7EB" }}
                       className=" flex items-center"

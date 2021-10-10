@@ -121,7 +121,7 @@ export default function Sidebar({ isOpen, closeSidebar }) {
                           })
                         }
                         key={i}
-                        className="border  transition duration-500 ease-in-out  border-custom_border-hover searched_location border-opacity-0 hover:border-opacity-100 p-2 mb-6  cursor-pointer flex justify-between items-center"
+                        className="border  transition duration-500 ease-in-out  border-custom_border-hover searched_location border-opacity-0 hover:border-opacity-100 p-2 mb-6  md:cursor-pointer flex justify-between items-center"
                       >
                         <h2>{item.title}</h2>
                         <span className="hide">
