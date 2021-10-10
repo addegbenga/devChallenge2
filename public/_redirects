@@ -1,2 +1,2 @@
 /giphy/*  https://www.metaweather.com/api/:splat  200
-/api/*    https://ip-api.com/json/:splat 200!
+/api/*    http://ip-api.com/json/:splat 200!
