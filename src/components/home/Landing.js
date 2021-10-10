@@ -206,7 +206,7 @@ export default function Landing() {
                     })
                   }
                   key={i}
-                  className="select-none flex bg-custom_bg-secondary flex-col  md:flex-grow hover:scale-110 transition duration-300 ease-in-out transform  items-center p-2 "
+                  className="select-none flex bg-custom_bg-secondary flex-col  md:flex-grow hover:border-custom_border-hover transition duration-300 ease-in-out transform  items-center p-2 "
                 >
                   <div className="flex select-none  flex-col items-center pt-1">
                     <h1 style={{ fontWeight: 500 }} className="text-white pb-1">
