@@ -6,7 +6,7 @@ import {
   IS_LOADING,
   GET_WEATHER_ERROR,
 } from "../actions/types";
-const api = "https://www.metaweather.com/api";
+const api = "https://www.metaweather.com";
 
 export const getWeatherByLocation = (body) => async (dispatch) => {
   try {
