@@ -65,19 +65,18 @@ export default function Landing() {
                   <MdOutlineMyLocation size={24} />
                 </div>
               </div>
-              {!loading && (
-                <div className="mt-28 flex justify-center">
-                  <img
-                    className="w-28 "
-                    src={`/assets/${
-                      singledata
-                        ? singledata.weather_state_abbr
-                        : weatherdata && weatherdata[0].weather_state_abbr
-                    }.png`}
-                    alt="weather"
-                  />
-                </div>
-              )}
+
+              <div className="mt-28 flex justify-center">
+                <img
+                  className="w-28 "
+                  src={`/assets/${
+                    singledata
+                      ? singledata.weather_state_abbr
+                      : weatherdata && weatherdata[0].weather_state_abbr
+                  }.png`}
+                  alt="weather"
+                />
+              </div>
             </div>
           ) : null}
 
