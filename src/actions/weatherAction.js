@@ -6,7 +6,6 @@ import {
   IS_LOADING,
   GET_WEATHER_ERROR,
 } from "../actions/types";
-const api = "https://www.metaweather.com";
 
 export const getWeatherByLocation = (body) => async (dispatch) => {
   try {
@@ -15,9 +14,9 @@ export const getWeatherByLocation = (body) => async (dispatch) => {
       type: IS_LOADING,
     });
     const response = await axios.get(
-      `/api/${api}/location/search/?lattlong=${body.lat},${body.long}`
+      `/giphy/location/search/?lattlong=${body.lat},${body.long}`
     );
-    console.log(response);
+  
     // /api/location/search/?lattlong=36.96,-122.02
     dispatch({
       type: GET_WEATHER,
@@ -37,7 +36,7 @@ export const getCurrentLocationWeather = (woeid) => async (dispatch) => {
       type: IS_LOADING,
     });
 
-    const response = await axios.get(`/api/${api}/location/${woeid}/`);
+    const response = await axios.get(`/giphy/location/${woeid}/`);
     dispatch({
       type: GET_CURRENT_WEATHER,
       payload: response.data,
@@ -56,7 +55,7 @@ export const getWeatherByQuery = (query) => async (dispatch) => {
       type: IS_LOADING,
     });
 
-    const response = await axios.get(`/api/${api}/location/search/?query=${query}`);
+    const response = await axios.get(`/giphy/location/search/?query=${query}`);
     dispatch({
       type: GET_WEATHER_QUERY_RESULT,
       payload: response.data,

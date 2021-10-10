@@ -1,5 +1,0 @@
- [[redirects]]
-  from = "/api/*"
-  to = ":splat"
-  status = 200
-  force = true
