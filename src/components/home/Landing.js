@@ -1,232 +1,373 @@
-import React from "react";
-import bg from "../../assets/Cloud-background.png";
-import shower from "../../assets/Shower.png";
-import { WiCelsius } from "react-icons/wi";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { GET_SINGLE_WEATHER } from "../../actions/types";
+import { WiCelsius, WiFahrenheit } from "react-icons/wi";
 import { MdLocationOn, MdOutlineMyLocation } from "react-icons/md";
 import { IoPaperPlane } from "react-icons/io5";
 import "./style.css";
+import Sidebar from "../nav/Sidebar";
+import Loading from "../../Loading";
 
-const data = [
-  {
-    name: "",
-  },
-  {
-    name: "",
-  },
-  {
-    name: "",
-  },
-  {
-    name: "",
-  },
-  {
-    name: "",
-  },
-];
 export default function Landing() {
+  const dispatch = useDispatch();
+  const weatherdata = useSelector(
+    (state) => state.weather.allweather.consolidated_weather
+  );
+  const [openSidebar, setOpenSidebar] = useState(false);
+  const singledata = useSelector((state) => state.weather.singleweather);
+  const location = useSelector((state) => state.weather.allweather);
+  const loading = useSelector((state) => state.weather.loading);
+
+  const mydate = (date) => {
+    const d = new Date(date);
+    return d;
+  };
+
+  const handleOpenSidebar = () => {
+    setOpenSidebar(true);
+  };
+  const handleCloseSidebar = () => {
+    setOpenSidebar(false);
+  };
+
   return (
-    <div className="bg-black md:flex ">
-      {/* // start  mobile first screen */}
-      <div className="search_home relative min-h-screen md:w-1/4 ">
-        <div className="absolute  top-20">
-          <img className="mix-blend-screen opacity-5 " src={bg} alt="" />
-        </div>
-
-        <div className="flex justify-between items-center p-2 pt-2 md:pt-4 overflow-hidden">
-          <input
-            style={{ background: "#6E707A", fontWeight: 500 }}
-            className="p-1.5 pl-3 md:w-1/2 text-sm placeholder-white  "
-            type="search"
-            placeholder="Search for places"
-          />
-          <div
-            style={{ background: "#6E707A" }}
-            className="p-2 rounded-full text-white shadow-lg"
-          >
-            <MdOutlineMyLocation size={18} />
+    <>
+      <Sidebar isOpen={openSidebar} closeSidebar={handleCloseSidebar} />
+      <div className="bg-black md:flex ">
+        {/* // start  mobile first screen */}
+        <div className="search_home relative min-h-screen md:w-1/4 ">
+          <div className="absolute  top-20">
+            <img
+              className="mix-blend-screen opacity-5 "
+              src="/assets/Cloud-background.png"
+              alt=""
+            />
           </div>
-        </div>
-        <div className="mt-28 flex justify-center">
-          <img className="w-28" src={shower} alt="weather" />
-        </div>
-        <div className="flex justify-center items-center mt-18 pb-16 flex-col">
-          <h1
-            style={{ fontSize: "144px", color: " #E7E7EB" }}
-            className=" flex items-center"
-          >
-            15
-            <WiCelsius size={120} className="-ml-9 mt-20 " color="white" />
-          </h1>
 
-          <h2
-            style={{ fontSize: "36px", color: " #A09FB1", fontWeight: 600 }}
-            className=""
-          >
-            Shower
-          </h2>
-          <div
-            className="mt-10 flex"
-            style={{ color: "#88869D", fontWeight: 500, fontSize: "18px" }}
-          >
-            <p>Today</p>
-            <span className="px-4">-</span>
-            <p>Fri, 5 jun</p>
-          </div>
-          <div
-            style={{ color: "#88869D", fontSize: "18px", fontWeight: "600" }}
-            className="mt-8 flex items-center"
-          >
-            <MdLocationOn />
-            <p className="pl-1">Helsinki</p>
-          </div>
-        </div>
-      </div>
-      {/* // end  mobile first screen */}
-
-      {/* // start of  mobile second screen */}
-
-      <div
-        style={{ background: "#100E1D" }}
-        className="min-h-screen px-5 md:px-20  md:flex-1"
-      >
-          <div>
-              <span>C</span>
-              <span>C</span>
-          </div>
-        <div className="grid grid-cols-2 md:flex md:flex-wrap gap-3  pt-16">
-          {data.map((item, i) => (
-            <div
-              style={{ background: "#1E213A" }}
-              key={i}
-              className=" flex flex-col md:flex-grow  items-center p-2"
+          <div className="flex justify-between items-center p-2 pt-2 md:pt-4 overflow-hidden">
+            <button
+              onClick={handleOpenSidebar}
+              className="text-sm p-2 px-4 text"
+              style={{
+                background: "#6E707A",
+                fontWeight: 500,
+                color: " #E7E7EB",
+              }}
             >
-              <div className="flex flex-col items-center pt-1">
-                <h1 style={{ fontWeight: 500 }} className="text-white pb-1">
-                  Tommorrow
-                </h1>
-                <img className="w-16" src={shower} alt="shower" />
-              </div>
-              <div className="flex justify-between items-center mt-4">
+              Search for places{" "}
+            </button>
+            <div
+              style={{ background: "#6E707A" }}
+              className="p-2 rounded-full text-white shadow-lg"
+            >
+              <MdOutlineMyLocation size={18} />
+            </div>
+          </div>
+          {!loading && (
+            <div className="mt-28 flex justify-center">
+              <img
+                className="w-28 "
+                src={`/assets/${
+                  singledata
+                    ? singledata.weather_state_abbr
+                    : weatherdata && weatherdata[0].weather_state_abbr
+                }.png`}
+                alt="weather"
+              />
+            </div>
+          )}
+
+          <div className="flex justify-center items-center mt-18 pb-16 flex-col">
+            {singledata ? (
+              <h1
+                style={{ fontSize: "144px", color: " #E7E7EB" }}
+                className=" flex items-center"
+              >
+                {parseInt(singledata.max_temp)}
+                <WiCelsius size={120} className="-ml-9 mt-20 " color="white" />
+              </h1>
+            ) : (
+              weatherdata && (
                 <h1
-                  style={{ fontSize: "18px", color: " #E7E7EB" }}
+                  style={{ fontSize: "144px", color: " #E7E7EB" }}
                   className=" flex items-center"
                 >
-                  15
-                  <WiCelsius size={39} className="-ml-3 pt-1 " color="white" />
+                  {parseInt(weatherdata[0].max_temp)}
+                  <WiCelsius
+                    size={120}
+                    className="-ml-9 mt-20 "
+                    color="white"
+                  />
                 </h1>
-                <h1
-                  style={{ fontSize: "18px", color: " #A09FB1" }}
-                  className=" ml-9 flex items-center"
-                >
-                  11
-                  <WiCelsius size={39} className="-ml-3 pt-1 " />
-                </h1>
-              </div>
-            </div>
-          ))}
-        </div>
-        {/* // end of  mobile second screen */}
+              )
+            )}
 
-        {/* // start of  mobile third screen */}
-        <div className="mt-10">
-          <h1
-            style={{ fontSize: "28px", fontWeight: "bold", color: "#E7E7EB" }}
-            className="text-white"
-          >
-            Today's Highlights
-          </h1>
-          <div className="md:grid md:grid-cols-2 md:gap-8">
-            {/* wind status */}
-            <div
-              className="flex flex-col items-center mt-8 p-3"
-              style={{ background: "#1E213A", color: "#E7E7EB" }}
+            <h2
+              style={{
+                fontSize: "36px",
+                color: " #A09FB1",
+                fontWeight: 600,
+              }}
             >
-              <h2 style={{ fontWeight: 500 }}>Wind status</h2>
-              <div className="flex items-center mb-1">
-                <h1 style={{ fontSize: "64px", fontWeight: 700 }}>7</h1>
-                <h1 style={{ fontWeight: 600 }} className="text-xl">
-                  mph
-                </h1>
-              </div>
-              <div className="flex items-center">
-                <div
-                  style={{ background: "rgba(255, 255, 255,0.3)" }}
-                  className="p-1 rounded-full"
-                >
-                  <IoPaperPlane size={10} color="#E7E7EB" />
-                </div>
-                <p style={{ fontWeight: 500 }} className="ml-2 text-xs">
-                  WSW
-                </p>
-              </div>
-            </div>
-            {/* wind status */}
+              {singledata
+                ? singledata.weather_state_name
+                : weatherdata && weatherdata[0].weather_state_name}
+            </h2>
 
-            {/* humidity */}
             <div
-              className="flex flex-col items-center mt-8  p-3 px-8"
-              style={{ background: "#1E213A", color: "#E7E7EB" }}
+              className="mt-10 flex"
+              style={{
+                color: "#88869D",
+                fontWeight: 500,
+                fontSize: "18px",
+              }}
             >
-              <h2 style={{ fontWeight: 500 }}>Humidity</h2>
-              <div className="flex items-center mb-1">
-                <h1 style={{ fontSize: "64px", fontWeight: 700 }}>84</h1>
-                <h1 style={{ fontWeight: 600 }} className="text-xl mt-4">
-                  %
-                </h1>
-              </div>
-              <div className="w-full h-1.5 bg-white mt-3 rounded-full mb-3">
-                <div className="w-1/2 h-1.5 bg-yellow-300 rounded-l-full "></div>
-                <div className="flex justify-between text-sm ">
-                  <h1 className="-mt-6 ">0</h1>
-                  <h1 className="-mt-6 ">50</h1>
-                  <h1 className="-mt-6 ">100</h1>
-                </div>
-              </div>
+              {singledata ? (
+                <>
+                  <p>Today</p>
+                  <span className="px-4">-</span>
+                  <p>{mydate(singledata.applicable_date).toDateString()}</p>
+                </>
+              ) : (
+                weatherdata && (
+                  <>
+                    <p>Today</p>
+                    <span className="px-4">-</span>
+                    <p>
+                      {mydate(weatherdata[0].applicable_date).toDateString()}
+                    </p>
+                  </>
+                )
+              )}
             </div>
-            {/* humidity */}
 
-            {/* visibility */}
             <div
-              className="flex flex-col items-center mt-8 md:mt-0 p-3"
-              style={{ background: "#1E213A", color: "#E7E7EB" }}
+              style={{
+                color: "#88869D",
+                fontSize: "18px",
+                fontWeight: "600",
+              }}
+              className="mt-8 flex items-center"
             >
-              <h2 style={{ fontWeight: 500 }}>Visibility</h2>
-              <div className="flex items-center mb-1">
-                <h1 style={{ fontSize: "64px", fontWeight: 700 }}>6,4</h1>
-                <h1 style={{ fontWeight: 600 }} className="text-xl mt-5 ml-2">
-                  miles
-                </h1>
-              </div>
+              <span className={`${loading && "absolute hidden"}`}>
+                {" "}
+                {!loading ? <MdLocationOn /> : null}
+              </span>
+              <p className="pl-1">{location.title}</p>
             </div>
-            {/* visibility */}
-
-            {/* air pressure */}
-            <div
-              className="flex flex-col items-center mt-8 md:mt-0 p-3"
-              style={{ background: "#1E213A", color: "#E7E7EB" }}
-            >
-              <h2 style={{ fontWeight: 500 }}>Air pressure</h2>
-              <div className="flex items-center mb-1">
-                <h1 style={{ fontSize: "64px", fontWeight: 700 }}>998</h1>
-                <h1 style={{ fontWeight: 600 }} className="text-xl mt-5 ml-3">
-                  mb
-                </h1>
-              </div>
-            </div>
-            {/* air pressure */}
           </div>
         </div>
+        {/* // end  mobile first screen */}
+
+        {/* // start of  mobile second screen */}
+
         <div
-          style={{ background: "#100E1D", color: "#E7E7EB", fontWeight: 500 }}
-          className="pt-20 flex justify-center pb-3 "
+          style={{ background: "#100E1D" }}
+          className="min-h-screen px-5 md:px-16  md:flex-1"
         >
-          <p className="text-sm">
-            created by <span className="font-bold">adeyemi</span> -
-            devChallenges.io
-          </p>
+          <div className="flex justify-end pt-4">
+            <button
+              style={{ background: "#E7E7EB" }}
+              className=" rounded-full mr-2 flex items-center justify-center bg-gray-300"
+            >
+              <WiCelsius size={35} />
+            </button>
+            <button
+              style={{ background: "#585676" }}
+              className=" rounded-full flex items-center justify-center bg-gray-300"
+            >
+              <WiFahrenheit color="#E7E7EB" size={35} />
+            </button>
+          </div>
+          <div className="grid grid-cols-2 md:flex md:flex-wrap gap-3 cursor-pointer  pt-16">
+            {!loading && weatherdata ? (
+              weatherdata.slice(1).map((item, i) => (
+                <div
+                  onClick={() =>
+                    dispatch({
+                      type: GET_SINGLE_WEATHER,
+                      payload: item,
+                    })
+                  }
+                  key={i}
+                  className="flex bg-custom_bg-secondary flex-col md:flex-grow hover:scale-110 transition duration-500 ease-in-out transform focus:bg-red-100  items-center p-2 hover:bg-custom_hover-primary"
+                >
+                  <div className="flex flex-col items-center pt-1">
+                    <h1 style={{ fontWeight: 500 }} className="text-white pb-1">
+                      {mydate(item.applicable_date).toDateString()}
+                    </h1>
+
+                    <img
+                      className="w-16"
+                      src={`/assets/${item.weather_state_abbr}.png`}
+                      alt="shower"
+                    />
+                  </div>
+                  <div className="flex justify-between items-center mt-4">
+                    <h1
+                      style={{ fontSize: "18px", color: " #E7E7EB" }}
+                      className=" flex items-center"
+                    >
+                      {parseInt(item.max_temp)}
+                      <WiCelsius
+                        size={39}
+                        className="-ml-3 pt-1 "
+                        color="white"
+                      />
+                    </h1>
+                    <h1
+                      style={{ fontSize: "18px", color: " #A09FB1" }}
+                      className=" ml-9 flex items-center"
+                    >
+                      {parseInt(item.min_temp)}
+                      <WiCelsius size={39} className="-ml-3 pt-1 " />
+                    </h1>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <Loading />
+            )}
+          </div>
+          {/* // end of  mobile second screen */}
+
+          {/* // start of  mobile third screen */}
+          <div className="mt-10">
+            <h1
+              style={{ fontSize: "28px", fontWeight: "bold", color: "#E7E7EB" }}
+              className="text-white"
+            >
+              Today's Highlights
+            </h1>
+            <div className="md:grid md:grid-cols-2 md:gap-8">
+              {/* wind status */}
+              <div
+                className="flex flex-col items-center mt-8 p-3"
+                style={{ background: "#1E213A", color: "#E7E7EB" }}
+              >
+                <h2 style={{ fontWeight: 500 }}>Wind status</h2>
+                <div className="flex items-center mb-1">
+                  <h1 style={{ fontSize: "64px", fontWeight: 700 }}>
+                    {" "}
+                    {singledata
+                      ? parseInt(singledata.wind_speed)
+                      : weatherdata && parseInt(weatherdata[0].wind_speed)}
+                  </h1>
+                  <h1 style={{ fontWeight: 600 }} className="text-xl">
+                    mph
+                  </h1>
+                </div>
+                <div className="flex items-center">
+                  <div
+                    style={{
+                      background: "rgba(255, 255, 255,0.3)",
+                      transform: `rotate(${
+                        singledata
+                          ? parseInt(singledata.wind_direction)
+                          : weatherdata &&
+                            parseInt(weatherdata[0].wind_direction)
+                      }deg)`,
+                    }}
+                    className="p-1 rounded-full"
+                  >
+                    <IoPaperPlane size={10} color="#E7E7EB" />
+                  </div>
+                  <p style={{ fontWeight: 500 }} className="ml-2 text-xs">
+                    WSW
+                  </p>
+                </div>
+              </div>
+              {/* wind status */}
+
+              {/* humidity */}
+              <div
+                className="flex flex-col items-center mt-8  p-3 px-8"
+                style={{ background: "#1E213A", color: "#E7E7EB" }}
+              >
+                <h2 style={{ fontWeight: 500 }}>Humidity</h2>
+                <div className="flex items-center mb-1">
+                  <h1 style={{ fontSize: "64px", fontWeight: 700 }}>
+                    {" "}
+                    {singledata
+                      ? parseInt(singledata.humidity)
+                      : weatherdata && parseInt(weatherdata[0].humidity)}
+                  </h1>
+                  <h1 style={{ fontWeight: 600 }} className="text-xl mt-4">
+                    %
+                  </h1>
+                </div>
+                <div className="w-full h-1.5 bg-white mt-3 rounded-full mb-3">
+                  <div
+                    style={{
+                      width: `${
+                        singledata
+                          ? parseInt(singledata.humidity)
+                          : weatherdata && parseInt(weatherdata[0].humidity)
+                      }%`,
+                    }}
+                    className="h-1.5 bg-yellow-300 rounded-l-full "
+                  ></div>
+                  <div className="flex justify-between text-sm ">
+                    <h1 className="-mt-6 ">0</h1>
+                    <h1 className="-mt-6 ">50</h1>
+                    <h1 className="-mt-6 ">100</h1>
+                  </div>
+                </div>
+              </div>
+              {/* humidity */}
+
+              {/* visibility */}
+              <div
+                className="flex flex-col items-center mt-8 md:mt-0 p-3"
+                style={{ background: "#1E213A", color: "#E7E7EB" }}
+              >
+                <h2 style={{ fontWeight: 500 }}>Visibility</h2>
+                <div className="flex items-center mb-1">
+                  <h1 style={{ fontSize: "64px", fontWeight: 700 }}>
+                    {singledata
+                      ? parseInt(singledata.visibility)
+                      : weatherdata && parseInt(weatherdata[0].visibility)}
+                  </h1>
+                  <h1 style={{ fontWeight: 600 }} className="text-xl mt-5 ml-2">
+                    miles
+                  </h1>
+                </div>
+              </div>
+              {/* visibility */}
+
+              {/* air pressure */}
+              <div
+                className="flex flex-col items-center mt-8 md:mt-0 p-3"
+                style={{ background: "#1E213A", color: "#E7E7EB" }}
+              >
+                <h2 style={{ fontWeight: 500 }}>Air pressure</h2>
+                <div className="flex items-center mb-1">
+                  <h1 style={{ fontSize: "64px", fontWeight: 700 }}>
+                    {" "}
+                    {singledata
+                      ? parseInt(singledata.air_pressure)
+                      : weatherdata && parseInt(weatherdata[0].air_pressure)}
+                  </h1>
+                  <h1 style={{ fontWeight: 600 }} className="text-xl mt-5 ml-3">
+                    mb
+                  </h1>
+                </div>
+              </div>
+              {/* air pressure */}
+            </div>
+          </div>
+          <div
+            style={{ background: "#100E1D", color: "#E7E7EB", fontWeight: 500 }}
+            className="pt-20 flex justify-center pb-3 "
+          >
+            <p className="text-sm">
+              created by <span className="font-bold">adeyemi</span> -
+              devChallenges.io
+            </p>
+          </div>
         </div>
+        {/* // end of  mobile third screen */}
       </div>
-      {/* // end of  mobile third screen */}
-    </div>
+    </>
   );
 }

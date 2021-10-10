@@ -1,0 +1,9 @@
+.hide {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.searched_location:hover .hide {
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
+}
