@@ -13,7 +13,8 @@ export const getWeatherByCurrentLocation = () => async (dispatch) => {
       type: IS_LOADING,
     });
 
-    const response = await axios.get("/ip/");
+    const response = await axios.get("https://extreme-ip-lookup.com/json/");
+    console.log(response);
     const resp = await axios.get(
       `/giphy/location/search/?lattlong=${response.data.lat},${response.data.lon}`
     );
