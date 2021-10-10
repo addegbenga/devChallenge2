@@ -66,7 +66,10 @@ export default function Landing() {
                 </div>
               </div>
 
-              <div className="mt-28 flex justify-center">
+              <div
+                style={{ marginTop: "3.7rem" }}
+                className=" flex justify-center"
+              >
                 <img
                   className="w-28 "
                   src={`/assets/${
@@ -80,85 +83,93 @@ export default function Landing() {
             </div>
           ) : null}
 
-          <div className="flex justify-center items-center mt-18 pb-16 flex-col">
-            {singledata ? (
-              <h1
-                style={{ fontSize: "144px", color: " #E7E7EB" }}
-                className=" flex items-center"
-              >
-                {parseInt(singledata.max_temp)}
-                <WiCelsius size={120} className="-ml-9 mt-20 " color="white" />
-              </h1>
-            ) : (
-              weatherdata && (
+          {!loading ? (
+            <div className="flex justify-center items-center mt-18 pb-16 flex-col">
+              {singledata ? (
                 <h1
                   style={{ fontSize: "144px", color: " #E7E7EB" }}
                   className=" flex items-center"
                 >
-                  {parseInt(weatherdata[0].max_temp)}
+                  {parseInt(singledata.max_temp)}
                   <WiCelsius
                     size={120}
                     className="-ml-9 mt-20 "
                     color="white"
                   />
                 </h1>
-              )
-            )}
-
-            <h2
-              style={{
-                fontSize: "36px",
-                color: " #A09FB1",
-                fontWeight: 600,
-              }}
-            >
-              {singledata
-                ? singledata.weather_state_name
-                : weatherdata && weatherdata[0].weather_state_name}
-            </h2>
-
-            <div
-              className="mt-10 flex"
-              style={{
-                color: "#88869D",
-                fontWeight: 500,
-                fontSize: "18px",
-              }}
-            >
-              {singledata ? (
-                <>
-                  <p>Today</p>
-                  <span className="px-4">-</span>
-                  <p>{mydate(singledata.applicable_date).toDateString()}</p>
-                </>
               ) : (
                 weatherdata && (
+                  <h1
+                    style={{ fontSize: "144px", color: " #E7E7EB" }}
+                    className=" flex items-center"
+                  >
+                    {parseInt(weatherdata[0].max_temp)}
+                    <WiCelsius
+                      size={120}
+                      className="-ml-9 mt-20 "
+                      color="white"
+                    />
+                  </h1>
+                )
+              )}
+
+              <h2
+                style={{
+                  fontSize: "36px",
+                  color: " #A09FB1",
+                  fontWeight: 600,
+                }}
+              >
+                {singledata
+                  ? singledata.weather_state_name
+                  : weatherdata && weatherdata[0].weather_state_name}
+              </h2>
+
+              <div
+                className="mt-4 flex"
+                style={{
+                  color: "#88869D",
+                  fontWeight: 500,
+                  fontSize: "18px",
+                }}
+              >
+                {singledata ? (
                   <>
                     <p>Today</p>
                     <span className="px-4">-</span>
-                    <p>
-                      {mydate(weatherdata[0].applicable_date).toDateString()}
-                    </p>
+                    <p>{mydate(singledata.applicable_date).toDateString()}</p>
                   </>
-                )
-              )}
-            </div>
+                ) : (
+                  weatherdata && (
+                    <>
+                      <p>Today</p>
+                      <span className="px-4">-</span>
+                      <p>
+                        {mydate(weatherdata[0].applicable_date).toDateString()}
+                      </p>
+                    </>
+                  )
+                )}
+              </div>
 
-            <div
-              style={{
-                color: "#88869D",
-                fontSize: "18px",
-                fontWeight: "600",
-              }}
-              className="mt-8 flex items-center"
-            >
-              <span className={`${loading && "absolute hidden"}`}>
-                {" "}
-                {!loading ? <MdLocationOn /> : null}
-              </span>
-              <p className="pl-1">{location.title}</p>
+              <div
+                style={{
+                  color: "#88869D",
+                  fontSize: "18px",
+                  fontWeight: "600",
+                }}
+                className="mt-8 flex items-center"
+              >
+                <span className={`${loading && "absolute hidden"}`}>
+                  {" "}
+                  {!loading ? <MdLocationOn /> : null}
+                </span>
+                <p className="pl-1">{location.title}</p>
+              </div>
             </div>
-          </div>
+          ) : (
+            <Loading />
+          )}
         </div>
         {/* // end  mobile first screen */}
 

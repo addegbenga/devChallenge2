@@ -9,15 +9,13 @@ import {
 
 export const getWeatherByLocation = (body) => async (dispatch) => {
   try {
-    // const response = await axios.get(`api/location/search/?query=${body}`);
     dispatch({
       type: IS_LOADING,
     });
     const response = await axios.get(
       `/giphy/location/search/?lattlong=${body.lat},${body.long}`
     );
-  
-    // /api/location/search/?lattlong=36.96,-122.02
+
     dispatch({
       type: GET_WEATHER,
       payload: response.data,

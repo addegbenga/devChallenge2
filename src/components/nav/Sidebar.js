@@ -18,6 +18,7 @@ export default function Sidebar({ isOpen, closeSidebar }) {
   const [searchValue, setSearchValue] = useState({
     location: "",
   });
+  const loading = useSelector((state) => state.weather.loading);
 
   const handleChange = (e) => {
     setSearchValue({ ...searchValue, [e.target.name]: e.target.value });
@@ -25,6 +26,14 @@ export default function Sidebar({ isOpen, closeSidebar }) {
 
   const handleSearchQuery = () => {
     dispatch(getWeatherByQuery(searchValue.location));
+  };
+
+  const handleQueryResult = (item) => {
+    dispatch({
+      type: GET_WEATHER_BY_QUERY_RESULT,
+      payload: item,
+    });
+    closeSidebar();
   };
 
   const handleCloseSideBar = () => {
@@ -107,19 +116,14 @@ export default function Sidebar({ isOpen, closeSidebar }) {
                     }}
                     className=" text-sm px-3 ml-1"
                   >
-                    search
+                    {loading ? <span>loading</span> : <span> search</span>}
                   </button>
                 </div>
                 <div style={{ color: "#E7E7EB" }} className="mt-10">
                   {searchResult &&
-                    searchResult.map((item,i) => (
+                    searchResult.map((item, i) => (
                       <div
-                        onClick={() =>
-                          dispatch({
-                            type: GET_WEATHER_BY_QUERY_RESULT,
-                            payload: item,
-                          })
-                        }
+                        onClick={() => handleQueryResult(item)}
                         key={i}
                         className="border  transition duration-500 ease-in-out  border-custom_border-hover searched_location border-opacity-0 hover:border-opacity-100 p-2 mb-6  md:cursor-pointer flex justify-between items-center"
                       >
