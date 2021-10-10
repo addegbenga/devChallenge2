@@ -1,1 +1,2 @@
 /giphy/*  https://www.metaweather.com/api/:splat  200
+/ip/*   https://extreme-ip-lookup.com/json/:splat 200
