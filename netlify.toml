@@ -1,8 +1,7 @@
  [[redirects]]
-  from = "/api"
+  from = "/search"
   to = "https://www.metaweather.com"
   status = 200
   force = true
   headers = {X-From = "Netlify"}
-
 
