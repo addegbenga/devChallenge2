@@ -7,18 +7,20 @@ import {
   GET_WEATHER_ERROR,
 } from "../actions/types";
 
-export const getWeatherByLocation = (body) => async (dispatch) => {
+export const getWeatherByCurrentLocation = () => async (dispatch) => {
   try {
     dispatch({
       type: IS_LOADING,
     });
-    const response = await axios.get(
-      `/giphy/location/search/?lattlong=${body.lat},${body.long}`
+
+    const response = await axios.get("https://extreme-ip-lookup.com/json/");
+    const resp = await axios.get(
+      `/giphy/location/search/?lattlong=${response.data.lat},${response.data.lon}`
     );
 
     dispatch({
       type: GET_WEATHER,
-      payload: response.data,
+      payload: resp.data,
     });
   } catch (error) {
     dispatch({

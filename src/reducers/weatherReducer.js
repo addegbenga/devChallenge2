@@ -7,6 +7,8 @@ import {
   CLEAR_SEARCH_RESULT,
   IS_LOADING,
   GET_WEATHER_ERROR,
+  GET_USER_LOCATION,
+  GET_USER_LOCATION_ERROR,
 } from "../actions/types";
 
 const initialState = {
@@ -14,12 +16,19 @@ const initialState = {
   searchResult: [],
   allweather: [],
   singleweather: null,
-  loading: false,
+  loading: true,
+  location: null,
   error: {},
 };
 
 export const weatherReducer = (state = initialState, action) => {
   switch (action.type) {
+    case GET_USER_LOCATION:
+      return {
+        ...state,
+        location: action.payload,
+        loading: false,
+      };
     case GET_WEATHER:
       return {
         ...state,
@@ -74,6 +83,12 @@ export const weatherReducer = (state = initialState, action) => {
         loading: true,
       };
     case GET_WEATHER_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+        loading: false,
+      };
+    case GET_USER_LOCATION_ERROR:
       return {
         ...state,
         error: action.payload,
