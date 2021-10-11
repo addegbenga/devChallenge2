@@ -137,7 +137,11 @@ export default function Landing() {
                   <>
                     {/* <p>Today</p>
                     <span className="px-4">-</span> */}
-                    <p>{mydate(singledata.applicable_date).toDateString()}</p>
+                    <p>
+                      {mydate(singledata.applicable_date)
+                        .toDateString()
+                        .slice(0, 8)}
+                    </p>
                   </>
                 ) : (
                   weatherdata && (
@@ -145,7 +149,9 @@ export default function Landing() {
                       {/* <p>Today</p>
                       <span className="px-4">-</span> */}
                       <p>
-                        {mydate(weatherdata[0].applicable_date).toDateString()}
+                        {mydate(weatherdata[0].applicable_date)
+                          .toDateString()
+                          .slice(0, 8)}
                       </p>
                     </>
                   )
@@ -210,7 +216,7 @@ export default function Landing() {
                 >
                   <div className="flex select-none  flex-col items-center pt-1">
                     <h1 style={{ fontWeight: 500 }} className="text-white pb-1">
-                      {mydate(item.applicable_date).toDateString()}
+                      {mydate(item.applicable_date).toDateString().slice(0, 8)}
                     </h1>
 
                     <img
@@ -258,7 +264,7 @@ export default function Landing() {
                 }}
                 className="text-white"
               >
-                {mydate(singledata.applicable_date).toDateString()}
+                {mydate(singledata.applicable_date).toDateString().slice(0, 8)}
                 Highlights
               </h1>
             ) : (
