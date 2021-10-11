@@ -24,7 +24,8 @@ export default function Sidebar({ isOpen, closeSidebar }) {
     setSearchValue({ ...searchValue, [e.target.name]: e.target.value });
   };
 
-  const handleSearchQuery = () => {
+  const handleSearchQuery = (e) => {
+    e.preventDefault();
     dispatch(getWeatherByQuery(searchValue.location));
   };
 
@@ -92,33 +93,35 @@ export default function Sidebar({ isOpen, closeSidebar }) {
                     <FaTimes color="#E7E7EB" size={22} />
                   </button>
                 </div>
-                <div className="flex w-full ">
-                  <div className="relative flex flex-1">
-                    <input
-                      placeholder="search location"
-                      type="search"
-                      autoComplete="true"
-                      value={searchValue.location}
-                      name="location"
-                      onChange={(e) => handleChange(e)}
-                      className="border text-white text-sm w-full bg-transparent placeholder-gray-500  border-indigo-100   focus:border-indigo-300  focus:text-gray-600 focus:outline-none  p-2 pl-7  md:pl-8 "
-                    />
-                    <div className="absolute text-gray-500  left-2 top-2.5 md:top-2.5">
-                      <AiOutlineSearch />
+                <form onSubmit={handleSearchQuery}>
+                  <div className="flex w-full ">
+                    <div className="relative flex flex-1">
+                      <input
+                        placeholder="search location"
+                        type="search"
+                        required
+                        autoComplete="true"
+                        value={searchValue.location}
+                        name="location"
+                        onChange={(e) => handleChange(e)}
+                        className="border text-white text-sm w-full bg-transparent placeholder-gray-500  border-indigo-100   focus:border-indigo-300  focus:text-gray-600 focus:outline-none  p-2 pl-7  md:pl-8 "
+                      />
+                      <div className="absolute text-gray-500  left-2 top-2.5 md:top-2.5">
+                        <AiOutlineSearch />
+                      </div>
                     </div>
+                    <button
+                      style={{
+                        background: "#3C47E9",
+                        fontWeight: 500,
+                        color: "#E7E7EB",
+                      }}
+                      className=" text-sm px-3 ml-1"
+                    >
+                      {loading ? <span>loading</span> : <span> search</span>}
+                    </button>
                   </div>
-                  <button
-                    onClick={handleSearchQuery}
-                    style={{
-                      background: "#3C47E9",
-                      fontWeight: 500,
-                      color: "#E7E7EB",
-                    }}
-                    className=" text-sm px-3 ml-1"
-                  >
-                    {loading ? <span>loading</span> : <span> search</span>}
-                  </button>
-                </div>
+                </form>
                 <div style={{ color: "#E7E7EB" }} className="mt-10">
                   {searchResult &&
                     searchResult.map((item, i) => (
