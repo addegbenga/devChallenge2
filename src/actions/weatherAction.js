@@ -17,7 +17,6 @@ export const getWeatherByCurrentLocation = () => async (dispatch) => {
     });
 
     const response = await axios.get("/api/");
-    console.log(response);
     const resp = await axios.get(
       `/giphy/location/search/?lattlong=${response.data.latitude},${response.data.longitude}`
     );
