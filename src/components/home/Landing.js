@@ -4,8 +4,8 @@ import { GET_SINGLE_WEATHER } from "../../actions/types";
 import { WiCelsius, WiFahrenheit } from "react-icons/wi";
 import { MdLocationOn, MdOutlineMyLocation } from "react-icons/md";
 import { IoPaperPlane } from "react-icons/io5";
-// import dayjs from "dayjs"
-// import calender from "dayjs/plugin/calendar"
+import dayjs from "dayjs";
+// import calender from "dayjs/plugin/calendar";
 import "./style.css";
 import Sidebar from "../nav/Sidebar";
 import Loading from "../../utils/Loading";
@@ -20,10 +20,10 @@ export default function Landing() {
   const location = useSelector((state) => state.weather.allweather);
   const loading = useSelector((state) => state.weather.loading);
 
-  const mydate = (date) => {
-    const d = new Date(date);
-    return d;
-  };
+  // const mydate = (date) => {
+  //   const d = new Date(date);
+  //   return d;
+  // };
 
   const handleOpenSidebar = () => {
     setOpenSidebar(true);
@@ -140,9 +140,7 @@ export default function Landing() {
                     {/* <p>Today</p>
                     <span className="px-4">-</span> */}
                     <p>
-                      {mydate(singledata.applicable_date)
-                        .toDateString()
-                        .slice(0, 8)}
+                      {dayjs(singledata.applicable_date).format("ddd, D MMM")}
                     </p>
                   </>
                 ) : (
@@ -151,9 +149,9 @@ export default function Landing() {
                       {/* <p>Today</p>
                       <span className="px-4">-</span> */}
                       <p>
-                        {mydate(weatherdata[0].applicable_date)
-                          .toDateString()
-                          .slice(0, 8)}
+                        {dayjs(weatherdata[0].applicable_date).format(
+                          "ddd, D MMM"
+                        )}
                       </p>
                     </>
                   )
@@ -218,7 +216,7 @@ export default function Landing() {
                 >
                   <div className="flex select-none  flex-col items-center pt-1">
                     <h1 style={{ fontWeight: 500 }} className="text-white pb-1">
-                      {mydate(item.applicable_date).toDateString().slice(0, 8)}
+                      {dayjs(item.applicable_date).format("ddd, D MMM")}
                     </h1>
 
                     <img
@@ -266,7 +264,7 @@ export default function Landing() {
                 }}
                 className="text-white"
               >
-                {mydate(singledata.applicable_date).toDateString().slice(0, 8)}
+                {dayjs(singledata.applicable_date).format('ddd, D MMM')}
                 Highlights
               </h1>
             ) : (
