@@ -8,11 +8,11 @@
 
 <div align="center">
   <h3>
-    <a href="https://{your-demo-link.your-domain}">
+    <a href="https://www.loom.com/share/9cba89695fba4371b91571a3878aa994">
       Demo
     </a>
     <span> | </span>
-    <a href="https://{your-url-to-the-solution}">
+    <a href="https://weather-forecast007.netlify.app">
       Solution
     </a>
     <span> | </span>
@@ -44,6 +44,18 @@ Introduce your projects by taking a screenshot, video recordings or a gif. Try t
 - Where can I see your demo?
 - What was your experience building it.
 
+Building this project has broaden my knowledge of my previous understanding of building things.
+I got quite familiar with alot of external api's while working on this project.
+One of my major challenge was getting user current location.
+I needed to make the user experience to be sleek so my best option was getting user info from their Ip Address.
+This approach was chosen so the user interface wont be altered when user decide to turn off their location.
+Also i had challenges deploying to Vercel due to cors policy and majorly configuration issues.
+So i opt for netlify which came to the rescue, i learnt how their configuration work when working with external api's
+which only support http request for their free tier.
+This was a major win for me because its create alot of ideas of what to build next as a side project.
+Moving on i wll keep building and working on my skills thanks for reading to the end.
+
+
 ### Built With
 
 <!-- This section should list any major frameworks that you built your project using. Here are a few examples.-->
@@ -53,9 +65,20 @@ Introduce your projects by taking a screenshot, video recordings or a gif. Try t
 
 ## Features
 
-<!-- List the features of your application or follow the template. Don't share the figma file here :) -->
+
+
+
 
 What features did you develop?
+<!-- List the features of your application or follow the template. Don't share the figma file here :) -->
+<ul>
+<li>user can current location weather by default</li>
+<li>user can search for city and search will show your search query if available</li>
+<li>user can see weather of today and the next 5 days</li>
+<li>user can see weather status image for each type of weather </li>
+<li>user can see additional info like humidity percentage, visibility indicator, and air pressure number about each weather when they click on it</li>
+<li></li>
+</ul>
 
 ## How To Use
 
@@ -65,7 +88,7 @@ To clone and run this application, you'll need [Git](https://git-scm.com) and [N
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/your-user-name/your-project-name
+$ git clone git@github.com:addegbenga/devChallenge2.git
 
 # Install dependencies
 $ npm install
