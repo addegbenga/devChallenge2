@@ -39,9 +39,13 @@
 
 ![screenshot](https://raw.githubusercontent.com/addegbenga/devChallenge2/main/public/assets/desktopside.png?raw=true")
 
-Introduce your projects by taking a screenshot, video recordings or a gif. Try to tell us about the solution you built by answering the following:
 
 - Where can I see your demo?
+
+<a href="https://www.loom.com/share/9cba89695fba4371b91571a3878aa994">
+      Check out the demo here real quick
+</a>
+
 - What was your experience building it.
 
 Building this project has broaden my knowledge of my previous understanding of building things.
