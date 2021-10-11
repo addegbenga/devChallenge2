@@ -258,7 +258,8 @@ export default function Landing() {
                 }}
                 className="text-white"
               >
-                {dayjs(singledata.applicable_date).format('ddd')}
+                {dayjs(singledata.applicable_date).format('ddd ')}
+
                 Highlights
               </h1>
             ) : (
