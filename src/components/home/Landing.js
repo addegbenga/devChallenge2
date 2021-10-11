@@ -5,7 +5,6 @@ import { WiCelsius, WiFahrenheit } from "react-icons/wi";
 import { MdLocationOn, MdOutlineMyLocation } from "react-icons/md";
 import { IoPaperPlane } from "react-icons/io5";
 import dayjs from "dayjs";
-// import calender from "dayjs/plugin/calendar";
 import "./style.css";
 import Sidebar from "../nav/Sidebar";
 import Loading from "../../utils/Loading";
@@ -19,11 +18,6 @@ export default function Landing() {
   const singledata = useSelector((state) => state.weather.singleweather);
   const location = useSelector((state) => state.weather.allweather);
   const loading = useSelector((state) => state.weather.loading);
-
-  // const mydate = (date) => {
-  //   const d = new Date(date);
-  //   return d;
-  // };
 
   const handleOpenSidebar = () => {
     setOpenSidebar(true);
@@ -264,7 +258,7 @@ export default function Landing() {
                 }}
                 className="text-white"
               >
-                {dayjs(singledata.applicable_date).format('ddd, D MMM')}
+                {dayjs(singledata.applicable_date).format('ddd')}
                 Highlights
               </h1>
             ) : (
