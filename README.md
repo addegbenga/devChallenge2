@@ -62,6 +62,8 @@ Moving on i wll keep building and working on my skills thanks for reading to the
 
 - [React](https://reactjs.org/)
 - [Tailwind](https://tailwindcss.com/)
+- [meta-weather-api](https://www.metaweather.com/api/)
+- [ip-geolocation](https://ipgeolocation.abstractapi.com)
 
 ## Features
 
@@ -93,6 +95,11 @@ $ git clone git@github.com:addegbenga/devChallenge2.git
 # Install dependencies
 $ npm install
 
+# Setup your ip
+Get your api key from ip-geolocation and setup your http-proxy-middleware to proxy from /api/ to  https://ipgeolocation.abstractapi.com/v1/?api_key={api-key}.
+This setup very important to run locally.
+
 # Run the app
 $ npm start
 ```
+you will need to 
