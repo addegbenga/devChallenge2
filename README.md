@@ -79,7 +79,6 @@ What features did you develop?
 <li>user can see weather of today and the next 5 days</li>
 <li>user can see weather status image for each type of weather </li>
 <li>user can see additional info like humidity percentage, visibility indicator, and air pressure number about each weather when they click on it</li>
-<li></li>
 </ul>
 
 ## How To Use
@@ -102,4 +101,3 @@ This setup very important to run locally.
 # Run the app
 $ npm start
 ```
-you will need to 
