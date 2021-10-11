@@ -41,9 +41,8 @@
 
 
 - Where can I see your demo?
-
 <a href="https://www.loom.com/share/9cba89695fba4371b91571a3878aa994">
-      Check out the demo here real quick
+     Video Demo
 </a>
 
 - What was your experience building it.
