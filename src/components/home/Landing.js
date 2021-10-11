@@ -135,15 +135,15 @@ export default function Landing() {
               >
                 {singledata ? (
                   <>
-                    <p>Today</p>
-                    <span className="px-4">-</span>
+                    {/* <p>Today</p>
+                    <span className="px-4">-</span> */}
                     <p>{mydate(singledata.applicable_date).toDateString()}</p>
                   </>
                 ) : (
                   weatherdata && (
                     <>
-                      <p>Today</p>
-                      <span className="px-4">-</span>
+                      {/* <p>Today</p>
+                      <span className="px-4">-</span> */}
                       <p>
                         {mydate(weatherdata[0].applicable_date).toDateString()}
                       </p>
@@ -249,12 +249,31 @@ export default function Landing() {
 
           {/* // start of  mobile third screen */}
           <div className="mt-10">
-            <h1
-              style={{ fontSize: "28px", fontWeight: "bold", color: "#E7E7EB" }}
-              className="text-white"
-            >
-              Today's Highlights
-            </h1>
+            {singledata ? (
+              <h1
+                style={{
+                  fontSize: "28px",
+                  fontWeight: "bold",
+                  color: "#E7E7EB",
+                }}
+                className="text-white"
+              >
+                {mydate(singledata.applicable_date).toDateString()}
+                Highlights
+              </h1>
+            ) : (
+              <h1
+                style={{
+                  fontSize: "28px",
+                  fontWeight: "bold",
+                  color: "#E7E7EB",
+                }}
+                className="text-white"
+              >
+                Today's Highlights
+              </h1>
+            )}
+
             <div className="md:grid md:grid-cols-2 md:gap-8">
               {/* wind status */}
               <div
