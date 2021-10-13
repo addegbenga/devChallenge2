@@ -27,6 +27,9 @@ export default function Sidebar({ isOpen, closeSidebar }) {
   const handleSearchQuery = (e) => {
     e.preventDefault();
     dispatch(getWeatherByQuery(searchValue.location));
+    setSearchValue({
+      location: "",
+    });
   };
 
   const handleQueryResult = (item) => {
@@ -35,6 +38,9 @@ export default function Sidebar({ isOpen, closeSidebar }) {
       payload: item,
     });
     closeSidebar();
+    setSearchValue({
+      location: "",
+    });
   };
 
   const handleCloseSideBar = () => {

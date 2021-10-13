@@ -54,9 +54,6 @@ export const getCurrentLocationWeather = (woeid) => async (dispatch) => {
 
 export const getWeatherByQuery = (query) => async (dispatch) => {
   try {
-    dispatch({
-      type: IS_LOADING,
-    });
 
     const response = await axios.get(`/giphy/location/search/?query=${query}`);
     dispatch({
