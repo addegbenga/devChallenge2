@@ -8,11 +8,11 @@
 
 <div align="center">
   <h3>
-    <a href="https://www.loom.com/share/9cba89695fba4371b91571a3878aa994">
+    <a href="https://weather-forecast007.netlify.app">
       Demo
     </a>
     <span> | </span>
-    <a href="https://weather-forecast007.netlify.app">
+    <a href="https://github.com/addegbenga/devChallenge2">
       Solution
     </a>
     <span> | </span>
@@ -41,10 +41,9 @@
 
 
 - Where can I see your demo?
-<a href="https://www.loom.com/share/9cba89695fba4371b91571a3878aa994">
-     Video Demo
-</a>
-
+    <a href="https://weather-forecast007.netlify.app">
+      Demo
+    </a>
 - What was your experience building it.
 
 Building this project has broaden my knowledge of my previous understanding of building things.
